@@ -1,0 +1,15 @@
+/proc/sys/kernel/core_pattern		
+/proc/sys/kernel/hostname			
+/proc/sys/kernel/hotplug			
+/proc/sys/kernel/msgmax				
+/proc/sys/kernel/msgmnb				
+/proc/sys/kernel/panic				
+/proc/sys/kernel/panic_on_oops		
+/proc/sys/kernel/shmall				
+/proc/sys/kernel/shmmax				
+/proc/sys/kernel/shmmni				
+/proc/sys/vm/dirty_background_ratio	
+/proc/sys/vm/dirty_ratio			
+/proc/sys/vm/laptop_mode			
+/proc/sys/vm/panic_on_oom			
+/proc/sys/vm/vfs_cache_pressure		

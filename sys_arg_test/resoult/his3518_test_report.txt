@@ -1,0 +1,44 @@
+*********************************************************************************
+*********Args***********************Reference********************Actual**********
+*********************************************************************************
+/proc/sys/kernel/core_pattern	core.%e.%p.%t	core.%e.%p.%t
+/proc/sys/kernel/hostname	KEDACOM	KEDACOM
+/proc/sys/kernel/hotplug	/sbin/mdev	/sbin/mdev
+/proc/sys/kernel/msgmax	65536	65536
+/proc/sys/kernel/msgmnb	65536	65536
+/proc/sys/kernel/panic	60	60
+/proc/sys/kernel/panic_on_oops	1	1
+/proc/sys/kernel/shmall	2097152	2097152
+/proc/sys/kernel/shmmax	33554432	33554432
+/proc/sys/kernel/shmmni	4096	4096
+/proc/sys/vm/dirty_background_ratio	5	5
+/proc/sys/vm/dirty_ratio	10	10
+/proc/sys/vm/laptop_mode	1	1
+/proc/sys/vm/panic_on_oom	1	1
+/proc/sys/vm/vfs_cache_pressure	160	160
+
+
+**********************************************************************************
+*********************************Parameter comparison*****************************
+********Reference******************************************Actual*****************
+core.%e.%p.%t							core.%e.%p.%t
+KEDACOM								KEDACOM
+/sbin/mdev							/sbin/mdev
+65536								65536
+65536								65536
+60								60
+1								1
+2097152								2097152
+33554432							33554432
+4096								4096
+5								5
+10								10
+1								1
+1								1
+160								160
+
+
+**********************************************************************************
+************************************Device  Version*******************************
+**********************************************************************************
+Linux version 3.0.8 (sysbuild@ubuntu) (gcc version 4.4.1 (Hisilicon_v100(gcc4.4-290+uclibc_0.9.32.1+eabi+linuxpthread)) ) #49 Wed Jul 1 03:02:17 CST 2015
