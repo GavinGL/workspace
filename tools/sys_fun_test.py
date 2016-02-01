@@ -15,22 +15,29 @@
 
 import pexpect
 import threading
-import os,time
+import os,sys,time
 import multiprocessing
 
 #Test case switch. '1':on ;'0':off
 TestTelnet = 1
-TestSsh = 0
-TestFtp = 0
-SshPort = '2277'
+TestSsh = 1
+TestFtp = 1
+# Repeat times
+GetTimes = sys.argv[1]
+RepeatTimes = int(GetTimes)
+# Time Interval of starting threads
+TimeInterval = 0.2
+# Ssh port number
+SshPort = '22'
 # Remote host IP address
-IpAddress = '2.1.1.11'
+IpAddress = '2.1.1.10'
 # Username for login
 LoginName = 'admin'
 # Password for login
 LoginPassword = 'kedacomIPC'
 # Prompt such as:’ $ ’ , ‘ # ’ or ’ > ’
 LoginPrompt = '[$#>]'
+PasswordPrompt = 'admin@'+IpAddress+'\'s password:'
 
 def main(num):
 	#define thread pool
@@ -38,24 +45,22 @@ def main(num):
 	#greate thread objects
 	if ( TestTelnet == 1 ):
 		for i in range(num):
-			threads.append(threading.Thread(target=telnet_cmd, args=(IpAddress,LoginPassword)))
-#			p = multiprocessing.Process(target = telnet_cmd, args = (IpAddress,LoginPassword))
-#			p.start()
-#			print 'mythread id is :',p.pid
+			threads.append(threading.Thread(target=telnet_cmd, args=(IpAddress,LoginPassword,tel_list)))
 	if TestSsh is 1:
 		for i in range(0,num):
-			threads.append(threading.Thread(target=ssh_cmd, args=(IpAddress,LoginPassword)))
+			threads.append(threading.Thread(target=ssh_cmd, args=(IpAddress,LoginPassword,ssh_list)))
 	if TestFtp is 1:
 		for i in range(0,num):
-			threads.append(threading.Thread(target=ftp_cmd, args=(IpAddress,LoginPassword)))
+			threads.append(threading.Thread(target=ftp_cmd, args=(IpAddress,LoginPassword,ftp_list)))
     #start all threads
 	for t in range(len(threads)):
 		threads[t].start()
+		time.sleep(TimeInterval)
     #The main thread waits for all sub thread exits
 	for t in range(len(threads)):
 		threads[t].join()
 
-def telnet_cmd(IpAddress,LoginPassword):
+def telnet_cmd(IpAddress,LoginPassword,tel_list):
 	cmd = 'telnet ' + IpAddress
 	# 为 telnet 生成 spawn 类子程序
 	telnet = pexpect.spawn(cmd)
@@ -76,6 +81,8 @@ def telnet_cmd(IpAddress,LoginPassword):
 		    # 期待提示符出现.
 		    telnet.expect(LoginPrompt)
 		    time.sleep(5)
+		    tel_list.append(1)
+		    print 'Congratulations! telnet login correct!'
 		    # 将 '\n' 的命令结果输出.
 #		    print telnet.before
 		    # 将 telnet 子程序的执行权交给用户.
@@ -83,128 +90,101 @@ def telnet_cmd(IpAddress,LoginPassword):
 #		    print 'Left interact mode.'
 		# 匹配到了 pexpect.EOF 或 pexpect.TIMEOUT，表示超时或者 EOF，程序打印提示信息并退出.
 		elif (mylist2 == 1):
-			global tel_num_eof
-			tel_num_eof = tel_num_eof +1
+			tel_list.append(2)
 			print "Telnet login failed, due to EOF!!!"
 		elif(mylist2 == 2):
-			global tel_num_timeout
-			tel_num_timeout = tel_num_timeout +1
+			tel_list.append(3)
 			print "Telnet login failed, due to TIMEOUT!!!"
 		else:
-			pass
+			tel_list.append(0)
 		telnet.close(force=True)
 	# 匹配到了 pexpect.EOF 或 pexpect.TIMEOUT，表示超时或者 EOF，程序打印提示信息并退出.
 	elif (mylist == 1):
+		tel_list.append(0)
 		print "Telnet login failed, due to Unknown host!!!"
-		os._exit(0)
 	elif(mylist == 2):
-		global tel_num_eof
-		tel_num_eof = tel_num_eof +1
+		tel_list.append(2)
 		print "Telnet login failed, due to EOF!!!"
-		os._exit(0)
 	elif(mylist == 3):
-		global tel_num_timeout
-		tel_num_timeout = tel_num_timeout +1
+		tel_list.append(3)
 		print "Telnet login failed, due to TIMEOUT!!!"
-		os._exit(0)
 	else:
+		tel_list.append(0)
 		print "Telnet login failed, due to Others!!!"
-		os._exit(0)
-	telnet.close(force=True)
+	telnet.close()
 
-def ssh_cmd(IpAddress,LoginPassword):
+def ssh_cmd(IpAddress,LoginPassword,ssh_list):
 	cmd = 'ssh '+LoginName+'@' + IpAddress+' -p '+SshPort
 	# 为 ssh 生成 spawn 类子程序
 	ssh = pexpect.spawn(cmd)
-	# 期待'login'字符串出现，从而接下来可以输入用户名
-	mylist = ssh.expect(["[pP]assword", pexpect.EOF, pexpect.TIMEOUT,
-		'Are you sure you want to continue connecting (yes/no)?'])
-	if (mylist == 3):
-		print 'I am in the ????'
-		ssh.sendline('yes\n')
-	else:
-		pass
-	# 期待 "[pP]assword" 出现.
-	mylist = ssh.expect(["[pP]assword", pexpect.EOF, pexpect.TIMEOUT])
-	if ( mylist == 0 ):
-		# 匹配 "[pP]assword" 字符串成功，输入密码.
+	# 期待'passwd'字符串出现，从而接下来可以输入密码
+	mylist = ssh.expect(['password:','Are you sure you want to continue connecting (yes/no)?',
+		pexpect.EOF,pexpect.TIMEOUT],timeout=5)
+	if mylist == 0 :
 		ssh.sendline(LoginPassword)
-		# 期待提示符出现.
-		ssh.expect(LoginPrompt)
-		if (mylist == 0):
-		    # 匹配提示符成功，输入执行命令 '\n'
-		    ssh.sendline('\n')
-		    # 期待提示符出现.
-		    ssh.expect(LoginPrompt)
-		    time.sleep(5)
-		    # 将 '\n' 的命令结果输出.
-#		    print ssh.before
-		    # 将 ssh 子程序的执行权交给用户.
-#		    ssh.interact()
-#		    print 'Left interact mode.'
-		# 匹配到了 pexpect.EOF 或 pexpect.TIMEOUT，表示超时或者 EOF，程序打印提示信息并退出.
-		elif (mylist == 1):
-			ssh_num_eof = ssh_num_eof +1
-			print "Ssh login failed, due to EOF!!!"
-		elif(mylist == 2):
-			ssh_num_timeout = ssh_num_timeout +1
-			print "Ssh login failed, due to TIMEOUT!!!"
-		else:
-			pass
-		ssh.close(force=True)
-	# 匹配到了 pexpect.EOF 或 pexpect.TIMEOUT，表示超时或者 EOF，程序打印提示信息并退出.
-	elif(mylist == 1):
+		ssh_list.append(1)
+		print 'Congratulations! ssh login correct!'
+	elif mylist == 1:
+		ssh.sendline('yes\n')
+		ssh.expect('password: ')
+		ssh.sendline(LoginPassword)
+		ssh.sendline('\n')
+		ssh_list.append(1)
+	elif mylist == 2:
+		ssh_list.append(2)
 		print "Ssh login failed, due to EOF!!!"
-		os._exit(0)
-	elif(mylist == 2):
+	elif mylist == 3:
+		ssh_list.append(3)
 		print "Ssh login failed, due to TIMEOUT!!!"
-		os._exit(0)
+	ssh.close()
+
+def ftp_cmd(IpAddress,LoginPassword,ftp_list):
+	# 拼凑 ftp 命令
+	cmd = 'ftp ' + IpAddress
+	# 利用 ftp 命令作为 spawn 类构造函数的参数，生成一个 spawn 类的对象
+	ftp = pexpect.spawn(cmd)
+	# 期望具有提示输入用户名的字符出现
+	mylist = ftp.expect(["(?i)name", "(?i)Unknown host", pexpect.EOF, pexpect.TIMEOUT])
+	# 匹配到了 "(?i)name"，表明接下来要输入用户名
+	if ( mylist == 0 ):
+		# 发送登录用户名 + 换行符给子程序.
+		ftp.sendline(LoginName)
+		# 期望 "(?i)password" 具有提示输入密码的字符出现.
+		mylist = ftp.expect(["(?i)password", pexpect.EOF, pexpect.TIMEOUT])
+		ftp.sendline(LoginPassword)
+		# 期望登录成功后，提示符 "ftp>" 字符出现.
+		mylist = ftp.expect( ['ftp>', 'Login incorrect', 'Service not available',
+			pexpect.EOF, pexpect.TIMEOUT])
+		# 匹配到了 'ftp>'，登录成功.
+		if (mylist == 0):
+			ftp_list.append(1)
+			print 'Congratulations! ftp login correct!'
+			time.sleep(5)
+		elif (mylist2 == 1):
+			ftp_list.append(2)
+			print "Telnet login failed, due to EOF!!!"
+		elif(mylist2 == 2):
+			ftp_list.append(3)
+			print "Telnet login failed, due to TIMEOUT!!!"
+		else:
+			ftp_list.append(0)
+	# 匹配到了 pexpect.EOF 或 pexpect.TIMEOUT，表示超时或者 EOF，程序打印提示信息并退出
+	elif mylist == 3 :
+		ftp_list.append(2)
+		print "ftp login failed, due to EOF!!!"
+	elif mylist == 4:
+		ftp_list.append(3)
+		print "ftp login failed, due to TIMEOUT!!!"
 	else:
-		print "Ssh login failed, due to Others!!!"
-		os._exit(0)
-	ssh.close(force=True)
-'''
-def ssh_cmd(ip, passwd, cmd):
-	ret = -1
-	ssh = pexpect.spawn('ssh admin@%s "%s"' % (ip, cmd))
-	try:
-		i = ssh.expect(['password:', 'Are you sure you want to continue connecting (yes/no)?'], timeout=5)
-		if i == 0 :
-			ssh.sendline(passwd)
-		elif i == 1:
-		    ssh.sendline('yes\n')
-		    ssh.expect('password: ')
-		    ssh.sendline(passwd)
-		ssh.sendline(cmd)
-		r = ssh.read()
-		print r
-		ret = 0
-	except pexpect.EOF:
-		print "EOF"
-		ssh.close()
-		ret = -1
-	except pexpect.TIMEOUT:
-		print "TIMEOUT"
-		ssh.close()
-		ret = -2
-	return ret
-'''
-def show_resoult(num_timeout,num_eof):
-	print 'Success times : ',RepeatTimes-num_eof-num_timeout
-	print 'Timeout times : ',num_timeout
-	print 'EOF     times : ',num_eof
-	print '============================='
+		ftp_list.append(0)
+		print "ftp login failed, due to Others"
+	ftp.close()
 
 if __name__ == '__main__':
 	try:
-		# Repeat times
-		RepeatTimes = 10
-		tel_num_timeout = 0
-		tel_num_eof =0
-		ssh_num_timeout = 0
-		ssh_num_eof =0
-		ftp_num_timeout = 0
-		ftp_num_eof =0
+		tel_list = [0]
+		ssh_list = [0]
+		ftp_list = [0]
 		main(RepeatTimes)
 #		print "------------------------"
 #		print 'process id:', os.getpid()
@@ -213,25 +193,25 @@ if __name__ == '__main__':
 		if TestTelnet is 1:
 			print '============================='
 			print '====== Telnet  Resoult ======'
-			print 'Success times : ',RepeatTimes-tel_num_eof-tel_num_timeout
-			print 'Timeout times : ',tel_num_timeout
-			print 'EOF     times : ',tel_num_eof
+			print 'Success times : ',tel_list.count(1)
+			print 'Timeout times : ',tel_list.count(3)
+			print 'EOF     times : ',tel_list.count(2)
 			print '============================='
 #			show_resoult(tel_num_timeout,tel_num_eof)
 		if TestSsh is 1:
 			print '============================='
 			print '======== Ssh Resoult ========'
-			print 'Success times : ',RepeatTimes-ssh_num_eof-ssh_num_timeout
-			print 'Timeout times : ',ssh_num_timeout
-			print 'EOF     times : ',ssh_num_eof
+			print 'Success times : ',ssh_list.count(1)
+			print 'Timeout times : ',ssh_list.count(3)
+			print 'EOF     times : ',ssh_list.count(2)
 			print '============================='
 #			show_resoult(ssh_num_timeout,ssh_num_eof)
 		if TestFtp is 1:
 			print '============================='
 			print '======== Ssh Resoult ========'
-			print 'Success times : ',RepeatTimes-ftp_num_eof-ftp_num_timeout
-			print 'Timeout times : ',ftp_num_timeout
-			print 'EOF     times : ',ftp_num_eof
+			print 'Success times : ',ftp_list.count(1)
+			print 'Timeout times : ',ftp_list.count(3)
+			print 'EOF     times : ',ftp_list.count(2)
 			print '============================='
 #			show_resoult(ssh_num_timeout,ssh_num_eof)
 	except Exception, e:
