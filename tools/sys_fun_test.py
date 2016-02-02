@@ -3,14 +3,11 @@
 '''
  * Copyright (c) 2009-~ Guo lei
  *
- * This source code is released for free distribution under the terms of the
- * GNU General Public License
- *
  * Author:       Guo lei<guolei@kedacom.com>
  * Created Time: Sat 30 Jan 2016 11:33:50 AM CST
  * File Name:    sys_fun_test.py
  *
- * Description:  
+ * Description:
 '''
 
 import pexpect
@@ -18,10 +15,12 @@ import threading
 import os,sys,time
 import multiprocessing
 
+Debug = 0
+Manual = 0
 #Test case switch. '1':on ;'0':off
-TestTelnet = 1
+TestTelnet = 0
 TestSsh = 1
-TestFtp = 1
+TestFtp = 0
 # Repeat times
 GetTimes = sys.argv[1]
 RepeatTimes = int(GetTimes)
@@ -39,6 +38,7 @@ LoginPassword = 'kedacomIPC'
 LoginPrompt = '[$#>]'
 PasswordPrompt = 'admin@'+IpAddress+'\'s password:'
 
+#Need to be optimized by using process pool
 def main(num):
 	#define thread pool
 	threads = []
@@ -52,11 +52,11 @@ def main(num):
 	if TestFtp is 1:
 		for i in range(0,num):
 			threads.append(threading.Thread(target=ftp_cmd, args=(IpAddress,LoginPassword,ftp_list)))
-    #start all threads
+	#start all threads
 	for t in range(len(threads)):
 		threads[t].start()
 		time.sleep(TimeInterval)
-    #The main thread waits for all sub thread exits
+	#The main thread waits for all sub thread exits
 	for t in range(len(threads)):
 		threads[t].join()
 
@@ -76,41 +76,63 @@ def telnet_cmd(IpAddress,LoginPassword,tel_list):
 		# 期待提示符出现.
 		telnet.expect(LoginPrompt)
 		if (mylist2 == 0):
-		    # 匹配提示符成功，输入执行命令 '\n'
-		    telnet.sendline('\n')
-		    # 期待提示符出现.
-		    telnet.expect(LoginPrompt)
-		    time.sleep(5)
-		    tel_list.append(1)
-		    print 'Congratulations! telnet login correct!'
-		    # 将 '\n' 的命令结果输出.
-#		    print telnet.before
-		    # 将 telnet 子程序的执行权交给用户.
-#		    telnet.interact()
-#		    print 'Left interact mode.'
+			# 匹配提示符成功，输入执行命令 '\n'
+			telnet.sendline('\n')
+			# 期待提示符出现.
+			telnet.expect(LoginPrompt)
+			tel_list.append(1)
+			if Debug == 0:
+				pass
+			else:
+				print 'Congratulations! telnet login correct!'
+			if Manual == 1:
+				telnet.interact()
+			else:
+				if TimeInterval == 0:
+					time.sleep(10)
+				else:
+					time.sleep(RepeatTimes*TimeInterval+5)
 		# 匹配到了 pexpect.EOF 或 pexpect.TIMEOUT，表示超时或者 EOF，程序打印提示信息并退出.
 		elif (mylist2 == 1):
 			tel_list.append(2)
-			print "Telnet login failed, due to EOF!!!"
+			if Debug == 0:
+				pass
+			else:
+				print "Telnet login failed, due to EOF!!!"
 		elif(mylist2 == 2):
 			tel_list.append(3)
-			print "Telnet login failed, due to TIMEOUT!!!"
+			if Debug == 0:
+				pass
+			else:
+				print "Telnet login failed, due to TIMEOUT!!!"
 		else:
 			tel_list.append(0)
 		telnet.close(force=True)
 	# 匹配到了 pexpect.EOF 或 pexpect.TIMEOUT，表示超时或者 EOF，程序打印提示信息并退出.
 	elif (mylist == 1):
 		tel_list.append(0)
-		print "Telnet login failed, due to Unknown host!!!"
+		if Debug == 0:
+			pass
+		else:
+			print "Telnet login failed, due to Unknown host!!!"
 	elif(mylist == 2):
 		tel_list.append(2)
-		print "Telnet login failed, due to EOF!!!"
+		if Debug == 0:
+			pass
+		else:
+			print "Telnet login failed, due to EOF!!!"
 	elif(mylist == 3):
 		tel_list.append(3)
-		print "Telnet login failed, due to TIMEOUT!!!"
+		if Debug == 0:
+			pass
+		else:
+			print "Telnet login failed, due to TIMEOUT!!!"
 	else:
 		tel_list.append(0)
-		print "Telnet login failed, due to Others!!!"
+		if Debug == 0:
+			pass
+		else:
+			print "Telnet login failed, due to Others!!!"
 	telnet.close()
 
 def ssh_cmd(IpAddress,LoginPassword,ssh_list):
@@ -123,7 +145,17 @@ def ssh_cmd(IpAddress,LoginPassword,ssh_list):
 	if mylist == 0 :
 		ssh.sendline(LoginPassword)
 		ssh_list.append(1)
-		print 'Congratulations! ssh login correct!'
+		if Debug == 0:
+			pass
+		else:
+			print 'Congratulations! ssh login correct!'
+		if Manual == 1:
+				telnet.interact()
+		else:
+			if TimeInterval == 0:
+				time.sleep(10)
+			else:
+				time.sleep(RepeatTimes*TimeInterval+5)
 	elif mylist == 1:
 		ssh.sendline('yes\n')
 		ssh.expect('password: ')
@@ -132,10 +164,16 @@ def ssh_cmd(IpAddress,LoginPassword,ssh_list):
 		ssh_list.append(1)
 	elif mylist == 2:
 		ssh_list.append(2)
-		print "Ssh login failed, due to EOF!!!"
+		if Debug == 0:
+			pass
+		else:
+			print "Ssh login failed, due to EOF!!!"
 	elif mylist == 3:
 		ssh_list.append(3)
-		print "Ssh login failed, due to TIMEOUT!!!"
+		if Debug == 0:
+			pass
+		else:
+			print "Ssh login failed, due to TIMEOUT!!!"
 	ssh.close()
 
 def ftp_cmd(IpAddress,LoginPassword,ftp_list):
@@ -158,26 +196,50 @@ def ftp_cmd(IpAddress,LoginPassword,ftp_list):
 		# 匹配到了 'ftp>'，登录成功.
 		if (mylist == 0):
 			ftp_list.append(1)
-			print 'Congratulations! ftp login correct!'
-			time.sleep(5)
+			if Debug == 0:
+				pass
+			else:
+				print 'Congratulations! ftp login correct!'
+			if Manual == 1:
+				telnet.interact()
+			else:
+				if TimeInterval == 0:
+					time.sleep(10)
+				else:
+					time.sleep(RepeatTimes*TimeInterval+5)
 		elif (mylist2 == 1):
 			ftp_list.append(2)
-			print "Telnet login failed, due to EOF!!!"
+			if Debug == 0:
+				pass
+			else:
+				print "Telnet login failed, due to EOF!!!"
 		elif(mylist2 == 2):
 			ftp_list.append(3)
-			print "Telnet login failed, due to TIMEOUT!!!"
+			if Debug == 0:
+				pass
+			else:
+				print "Telnet login failed, due to TIMEOUT!!!"
 		else:
 			ftp_list.append(0)
 	# 匹配到了 pexpect.EOF 或 pexpect.TIMEOUT，表示超时或者 EOF，程序打印提示信息并退出
 	elif mylist == 3 :
 		ftp_list.append(2)
-		print "ftp login failed, due to EOF!!!"
+		if Debug == 0:
+			pass
+		else:
+			print "ftp login failed, due to EOF!!!"
 	elif mylist == 4:
 		ftp_list.append(3)
-		print "ftp login failed, due to TIMEOUT!!!"
+		if Debug == 0:
+			pass
+		else:
+			print "ftp login failed, due to TIMEOUT!!!"
 	else:
 		ftp_list.append(0)
-		print "ftp login failed, due to Others"
+		if Debug == 0:
+			pass
+		else:
+			print "ftp login failed, due to Others"
 	ftp.close()
 
 if __name__ == '__main__':
@@ -186,10 +248,6 @@ if __name__ == '__main__':
 		ssh_list = [0]
 		ftp_list = [0]
 		main(RepeatTimes)
-#		print "------------------------"
-#		print 'process id:', os.getpid()
-#		print vip_list
-#		print "------------------------"
 		if TestTelnet is 1:
 			print '============================='
 			print '====== Telnet  Resoult ======'
@@ -197,7 +255,6 @@ if __name__ == '__main__':
 			print 'Timeout times : ',tel_list.count(3)
 			print 'EOF     times : ',tel_list.count(2)
 			print '============================='
-#			show_resoult(tel_num_timeout,tel_num_eof)
 		if TestSsh is 1:
 			print '============================='
 			print '======== Ssh Resoult ========'
@@ -205,16 +262,13 @@ if __name__ == '__main__':
 			print 'Timeout times : ',ssh_list.count(3)
 			print 'EOF     times : ',ssh_list.count(2)
 			print '============================='
-#			show_resoult(ssh_num_timeout,ssh_num_eof)
 		if TestFtp is 1:
 			print '============================='
-			print '======== Ssh Resoult ========'
+			print '======== Ftp Resoult ========'
 			print 'Success times : ',ftp_list.count(1)
 			print 'Timeout times : ',ftp_list.count(3)
 			print 'EOF     times : ',ftp_list.count(2)
 			print '============================='
-#			show_resoult(ssh_num_timeout,ssh_num_eof)
 	except Exception, e:
 		print str(e)
-#		traceback.print_exc()
 		os._exit(1)
