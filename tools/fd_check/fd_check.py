@@ -27,8 +27,8 @@ LoginName = 'admin'
 LoginPassword = 'admin123'
 # Prompt such as:’ $ ’ , ‘ # ’ or ’ > ’
 LoginPrompt = '#'
-TestTimes = '100'
-#def fd_check():
+# Set Test Times
+TestTimes = '300'
 
 def RunCheck():
 	os.system('cp fd_check.sh ~/tftpboot\n')
@@ -127,18 +127,27 @@ def Draw_Pic(srcfile):
 		pl.plot(data[:,0], data[:,1], line_type[i])
 
 	pl.title('FD Leak Check')# give plot a title
-	pl.xlabel('Log Times')# make axis labels
+	pl.xlabel('Log Times(/10sec)')# make axis labels
 	pl.ylabel('Handle Numbers')
+#	pl.xlim(0.0, 10)
 	pl.xlim(0.0, float(TestTimes)+1)# set axis limits
 #	pl.ylim(0.0, 300.)
-	pl.legend((filename),loc = 'right', numpoints=1)# make legend
+#	pl.figure(figsize=(18,10)) 
+	leg=pl.legend((filename), loc = 'upper left',shadow=True)# make legend
+#	leg=pl.legend((filename), bbox_to_anchor=[0.4, 0.8],loc = 'upper center',shadow=True)# make legend
+	frame  = leg.get_frame()
+	frame.set_facecolor('0.8')
+	for t in leg.get_texts():
+		t.set_fontsize('small') 
+	for l in leg.get_lines():
+		l.set_linewidth(1.)
 	endtime = time.strftime('%m%d%H%M%S',time.localtime(time.time()))
-	#pl.show()# show the plot on the screen
-	pl.savefig('./resoult/pic_'+endtime+'.png', format='png')
-	print 'Picture is saved as : pic_'+endtime+'.png'
+#	pl.show()# show the plot on the screen
+	pl.savefig('./resoult/pic_'+endtime+'.jpg', format='jpg')
+	print 'Picture is saved as : pic_'+endtime+'.jpg'
 
 if __name__ == '__main__':
-	os.system('rm *.txt\n')
-	RunCheck()
+#	os.system('rm *.txt\n')
+#	RunCheck()
 	Draw_Pic(RESOUTLOG)
 	os._exit(1)
