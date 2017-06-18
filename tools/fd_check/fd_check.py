@@ -20,11 +20,11 @@ import pexpect,time
 Port = '2277'
 RESOUTLOG = './total_handler.txt'
 # Remote host IP address
-IpAddress = '172.16.124.70'
+IpAddress = '192.168.2.10'
 # Username for login
 LoginName = 'admin'
 # Password for login
-LoginPassword = 'admin123'
+LoginPassword = 'admin321'
 # Prompt such as:’ $ ’ , ‘ # ’ or ’ > ’
 LoginPrompt = '#'
 # Set Test Times
@@ -32,7 +32,7 @@ TestTimes = '300'
 
 def RunCheck():
 	os.system('cp fd_check.sh ~/tftpboot\n')
-	time.sleep(0.2)
+	time.sleep(1)
 	cmd = 'telnet ' + IpAddress +' '+Port
 	telnet = pexpect.spawn(cmd)
 	mylist = telnet.expect(["NVR login:"])
@@ -70,7 +70,7 @@ def RunCheck():
 	telnet.close()
 	print 'Move total_handler.txt to current dir!!!'
 	os.system('mv ~/tftpboot/total_handler.txt .\n')
-	time.sleep(0.2)
+	time.sleep(1)
 
 def Draw_Pic(srcfile):
 	fileHandle = open ( srcfile, 'r' )

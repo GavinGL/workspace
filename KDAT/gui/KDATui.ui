@@ -1,0 +1,1644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>792</width>
+    <height>564</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>KDAT</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabMain">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>-1</y>
+      <width>771</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab_Home">
+     <attribute name="title">
+      <string>主页</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_Mode">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>140</y>
+        <width>251</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>模式选择</string>
+      </property>
+      <widget class="QRadioButton" name="radioButton_OneKey">
+       <property name="geometry">
+        <rect>
+         <x>21</x>
+         <y>26</y>
+         <width>89</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>一键分析</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_Custom">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>26</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>自定义分析</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="pushButton_StartAll">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>280</y>
+        <width>101</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Email">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>280</y>
+        <width>91</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>发送报告</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_Home">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>40</y>
+        <width>421</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="progressBar_Home">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>420</y>
+        <width>411</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>390</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>进度显示：</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_System">
+     <attribute name="title">
+      <string>系统分析</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_SysItem">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>221</width>
+        <height>121</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>选择分析项（可多选）</string>
+      </property>
+      <widget class="QCheckBox" name="checkBox_SysE2prom">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>EEPROM分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_SysHardware">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>硬件分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_SysSoftware">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>软件分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_SysAll">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>90</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>全选</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_Sys">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>40</y>
+        <width>421</width>
+        <height>311</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="progressBar_Sys">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>420</y>
+        <width>411</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>390</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>进度显示：</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_SysSet">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>400</y>
+        <width>221</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>当前页</string>
+      </property>
+      <widget class="QPushButton" name="pushButton_SysSave">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>21</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>保存参数</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_SysStart">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>20</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>开始分析</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_Run">
+     <attribute name="title">
+      <string>运行状态</string>
+     </attribute>
+     <widget class="QTextBrowser" name="textBrowser_Run">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>40</y>
+        <width>421</width>
+        <height>311</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>390</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>进度显示：</string>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="progressBar_Run">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>420</y>
+        <width>411</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_RunSet">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>400</y>
+        <width>221</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>当前页</string>
+      </property>
+      <widget class="QPushButton" name="pushButton_RunSave">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>21</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>保存参数</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_RunStart">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>20</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>开始分析</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_RunItem">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>221</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>选择分析项（可多选）</string>
+      </property>
+      <widget class="QCheckBox" name="checkBox_Mem">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>内存状态分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_Cpu">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CPU状态分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_Interrupt">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>中断状态分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_RunAll">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>110</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>全选</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_Storage">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>存储状态分析</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_RunTime">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>210</y>
+        <width>221</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>时间设置（秒）</string>
+      </property>
+      <widget class="QLineEdit" name="lineEdit_RunMem">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>15</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>20</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>内存状态：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>50</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CPU状态：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>80</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>中断状态：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>110</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>存储状态：</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_RunCpu">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>46</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_RunInterrupt">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>78</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_RunStorage">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>108</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_Network">
+     <attribute name="title">
+      <string>网络分析</string>
+     </attribute>
+     <widget class="QTextBrowser" name="textBrowser_Net">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>40</y>
+        <width>421</width>
+        <height>311</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>390</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>进度显示：</string>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="progressBar_Net">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>420</y>
+        <width>411</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_NetSet">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>400</y>
+        <width>221</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>当前页</string>
+      </property>
+      <widget class="QPushButton" name="pushButton_NetSave">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>21</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>保存参数</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_NetStart">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>20</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>开始分析</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_NetItem">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>221</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>选择分析项（可多选）</string>
+      </property>
+      <widget class="QCheckBox" name="checkBox_EthStatus">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>接口状态分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_LinkStatus">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>网络连接分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_RxTx">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>收发统计分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_NetAll">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>125</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>全选</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_NetService">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>网络服务分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_Capture">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>100</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>抓包分析</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_NetTime">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>210</y>
+        <width>221</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>时间设置（秒）</string>
+      </property>
+      <widget class="QLineEdit" name="lineEdit_NetLinkStatus">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>15</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_12">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>20</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>网络连接：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_13">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>50</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>收发统计：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_14">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>80</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>网络服务：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>110</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>抓包分析：</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_NetRxTx">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>46</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_NetService">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>78</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_NetCapture">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>108</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_Media">
+     <attribute name="title">
+      <string>媒体分析</string>
+     </attribute>
+     <widget class="QTextBrowser" name="textBrowser_Media">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>40</y>
+        <width>421</width>
+        <height>311</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>390</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>进度显示：</string>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="progressBar_Media">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>420</y>
+        <width>411</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_MediaSet">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>400</y>
+        <width>221</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>当前页</string>
+      </property>
+      <widget class="QPushButton" name="pushButton_MediaSave">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>21</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>保存参数</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_MediaStart">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>20</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>开始分析</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_MediaItem">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>221</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>选择分析项（可多选）</string>
+      </property>
+      <widget class="QCheckBox" name="checkBox_Encode">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>编码参数分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_Decode">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>解码参数分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_MediaAll">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>70</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>全选</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_MediaTime">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>210</y>
+        <width>221</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>时间设置（秒）</string>
+      </property>
+      <widget class="QLineEdit" name="lineEdit_MediaEncode">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>15</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_16">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>20</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>编码参数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_17">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>50</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>解码参数：</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_MediaDecode">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>46</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_Advance">
+     <attribute name="title">
+      <string>高级分析</string>
+     </attribute>
+     <widget class="QTextBrowser" name="textBrowser_Advanced">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>40</y>
+        <width>421</width>
+        <height>311</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>390</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>进度显示：</string>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="progressBar_Advanced">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>420</y>
+        <width>411</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_AdvancedSet">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>400</y>
+        <width>221</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>当前页</string>
+      </property>
+      <widget class="QPushButton" name="pushButton_AdvancedSave">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>21</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>保存参数</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_AdvancedStart">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>20</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>开始分析</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_AdvancedItem">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>221</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>选择分析项（可多选）</string>
+      </property>
+      <widget class="QCheckBox" name="checkBox_AdvancedSysdbg">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Sysdbg分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_AdvancedCpu">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CPU性能分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_AdvancedDisk">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>磁盘性能分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_AdvancedAll">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>125</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>全选</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_AdvancedSys">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>系统性能分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_AdvancedTask">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>100</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>进程线程分析</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_AdvancedTime">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>210</y>
+        <width>221</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>时间设置（秒）</string>
+      </property>
+      <widget class="QLineEdit" name="lineEdit_AdvancedSysdbg">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>15</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_20">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>19</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Sysdbg分析：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_21">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>43</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CPU性能分析：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_22">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>69</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>磁盘性能分析：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_23">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>93</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>系统性能分析：</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_AdvancedCpu">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>40</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_AdvancedDisk">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>66</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_AdvancedSys">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>91</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_27">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>117</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>进程线程分析：</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_AdvancedTask">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>116</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_App">
+     <attribute name="title">
+      <string>业务分析</string>
+     </attribute>
+     <widget class="QTextBrowser" name="textBrowser_App">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>40</y>
+        <width>421</width>
+        <height>311</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>390</y>
+        <width>72</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>进度显示：</string>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="progressBar_App">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>420</y>
+        <width>411</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_AppSet">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>400</y>
+        <width>221</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>当前页</string>
+      </property>
+      <widget class="QPushButton" name="pushButton_AppSave">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>21</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>保存参数</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_AppStart">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>20</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>开始分析</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_AppItem">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>221</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>选择分析项（可多选）</string>
+      </property>
+      <widget class="QCheckBox" name="checkBox_AppSourceStatus">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>181</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>业务进程资源占用分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_AppStability">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>业务稳定性分析</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_AppAll">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>66</y>
+         <width>131</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>全选</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_AppTime">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>210</y>
+        <width>221</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>时间设置（秒）</string>
+      </property>
+      <widget class="QLineEdit" name="lineEdit_AppSourceStatus">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>15</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_24">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>20</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>资源占用：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_25">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>50</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>稳定性分析：</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_AppStability">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>46</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>792</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuLink">
+    <property name="title">
+     <string>连接</string>
+    </property>
+    <addaction name="action_New"/>
+    <addaction name="action_Open"/>
+    <addaction name="action_Break"/>
+    <addaction name="action_Exit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="action_Document"/>
+    <addaction name="action_About"/>
+   </widget>
+   <addaction name="menuLink"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_New">
+   <property name="text">
+    <string>新建</string>
+   </property>
+  </action>
+  <action name="action_Open">
+   <property name="text">
+    <string>打开</string>
+   </property>
+  </action>
+  <action name="action_Break">
+   <property name="text">
+    <string>断开</string>
+   </property>
+  </action>
+  <action name="action_Exit">
+   <property name="text">
+    <string>退出</string>
+   </property>
+  </action>
+  <action name="action_Document">
+   <property name="text">
+    <string>查看帮助</string>
+   </property>
+  </action>
+  <action name="action_About">
+   <property name="text">
+    <string>关于KDAT</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>tabMain</tabstop>
+  <tabstop>radioButton_OneKey</tabstop>
+  <tabstop>radioButton_Custom</tabstop>
+  <tabstop>pushButton_StartAll</tabstop>
+  <tabstop>pushButton_Email</tabstop>
+  <tabstop>textBrowser_Home</tabstop>
+  <tabstop>checkBox_SysE2prom</tabstop>
+  <tabstop>checkBox_SysHardware</tabstop>
+  <tabstop>checkBox_SysSoftware</tabstop>
+  <tabstop>checkBox_SysAll</tabstop>
+  <tabstop>pushButton_SysSave</tabstop>
+  <tabstop>pushButton_SysStart</tabstop>
+  <tabstop>textBrowser_Sys</tabstop>
+  <tabstop>checkBox_Mem</tabstop>
+  <tabstop>checkBox_Cpu</tabstop>
+  <tabstop>checkBox_Interrupt</tabstop>
+  <tabstop>checkBox_Storage</tabstop>
+  <tabstop>checkBox_RunAll</tabstop>
+  <tabstop>lineEdit_RunMem</tabstop>
+  <tabstop>lineEdit_RunCpu</tabstop>
+  <tabstop>lineEdit_RunInterrupt</tabstop>
+  <tabstop>lineEdit_RunStorage</tabstop>
+  <tabstop>pushButton_RunSave</tabstop>
+  <tabstop>pushButton_RunStart</tabstop>
+  <tabstop>textBrowser_Run</tabstop>
+  <tabstop>checkBox_EthStatus</tabstop>
+  <tabstop>checkBox_LinkStatus</tabstop>
+  <tabstop>checkBox_RxTx</tabstop>
+  <tabstop>checkBox_NetService</tabstop>
+  <tabstop>checkBox_Capture</tabstop>
+  <tabstop>checkBox_NetAll</tabstop>
+  <tabstop>lineEdit_NetLinkStatus</tabstop>
+  <tabstop>lineEdit_NetRxTx</tabstop>
+  <tabstop>lineEdit_NetService</tabstop>
+  <tabstop>lineEdit_NetCapture</tabstop>
+  <tabstop>pushButton_NetSave</tabstop>
+  <tabstop>pushButton_NetStart</tabstop>
+  <tabstop>textBrowser_Net</tabstop>
+  <tabstop>checkBox_Encode</tabstop>
+  <tabstop>checkBox_Decode</tabstop>
+  <tabstop>checkBox_MediaAll</tabstop>
+  <tabstop>lineEdit_MediaEncode</tabstop>
+  <tabstop>lineEdit_MediaDecode</tabstop>
+  <tabstop>pushButton_MediaSave</tabstop>
+  <tabstop>pushButton_MediaStart</tabstop>
+  <tabstop>textBrowser_Media</tabstop>
+  <tabstop>checkBox_AdvancedSysdbg</tabstop>
+  <tabstop>checkBox_AdvancedCpu</tabstop>
+  <tabstop>checkBox_AdvancedDisk</tabstop>
+  <tabstop>checkBox_AdvancedSys</tabstop>
+  <tabstop>checkBox_AdvancedTask</tabstop>
+  <tabstop>checkBox_AdvancedAll</tabstop>
+  <tabstop>lineEdit_AdvancedSysdbg</tabstop>
+  <tabstop>lineEdit_AdvancedCpu</tabstop>
+  <tabstop>lineEdit_AdvancedDisk</tabstop>
+  <tabstop>lineEdit_AdvancedSys</tabstop>
+  <tabstop>lineEdit_AdvancedTask</tabstop>
+  <tabstop>pushButton_AdvancedSave</tabstop>
+  <tabstop>pushButton_AdvancedStart</tabstop>
+  <tabstop>textBrowser_Advanced</tabstop>
+  <tabstop>checkBox_AppSourceStatus</tabstop>
+  <tabstop>checkBox_AppStability</tabstop>
+  <tabstop>checkBox_AppAll</tabstop>
+  <tabstop>lineEdit_AppSourceStatus</tabstop>
+  <tabstop>lineEdit_AppStability</tabstop>
+  <tabstop>pushButton_AppSave</tabstop>
+  <tabstop>pushButton_AppStart</tabstop>
+  <tabstop>textBrowser_App</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
