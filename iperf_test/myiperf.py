@@ -659,6 +659,8 @@ def AllTest():
 #	print 'SER_ALIVE is ',SER_ALIVE
 
 if __name__ == '__main__':
+	if (os.path.exists(DIR_path)) is not True:
+		os.makedirs(DIR_path)
 	#open serial
 	try:
 		ser = serial.Serial(Serail_Com_Port,Serail_Com_Baud_Rate,Serail_Com_Data_Bits,
